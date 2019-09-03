@@ -5,13 +5,19 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "unsplash-js": "^5.0.0"
   },
+  "homepage": "https://harshmewada.github.io/darkpapers",
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -34,6 +40,5 @@
   "devDependencies": {},
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "homepage": "https://harshmewada.github.io/darkpapers"
+  "license": "ISC"
 }

@@ -35,7 +35,7 @@ const Popular = () => {
 
     setstate(array);
   }
-  // imgurl();
+  imgurl();
 
   var fruits = [];
   const photo = state.forEach(function(i, val) {

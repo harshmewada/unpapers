@@ -35,7 +35,7 @@ const Recents = () => {
     // console.log(array);
     setstate(array);
   }
-  // imgurl();
+  imgurl();
 
   var fruits = [];
   const photo = state.forEach(function(i, val) {
