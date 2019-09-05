@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -8,8 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Recents from "./recents";
 import Popular from "./popular";
-import bg2 from "../Images/bg2.png";
-import { height } from "@material-ui/system";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,13 +38,42 @@ function a11yProps(index) {
     "aria-controls": `scrollable-auto-tabpanel-${index}`
   };
 }
+const StyledTabs = withStyles({
+  indicator: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    "& > div": {
+      maxWidth: 80,
+      width: "100%",
+      backgroundColor: "#FC6E32"
+    }
+  }
+})(props => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
+
+const StyledTab = withStyles(theme => ({
+  root: {
+    textTransform: "none",
+    fontFamily: "Roboto",
+    fontSize: "5vw",
+    fontWeight: "550",
+    width: "43%",
+    margin: 5,
+    color: "#7C7D81",
+    opacity: 0.5,
+    marginRight: theme.spacing(1),
+    "&:focus": {
+      opacity: 1
+    }
+  }
+}))(props => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundImage: `url(${bg2})`
+    // backgroundImage: `url(${bg2})`
 
-    // backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper
   },
   tablabel: {
     textTransform: "none",
@@ -79,23 +106,29 @@ export default function Tabdiv() {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.tabbar} elevation={0}>
-        <Tabs
+        <StyledTabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
           centered
           className={classes.tab}
         >
-          <Tab label="Popular" className={classes.tablabel} {...a11yProps(0)} />
-          <Tab label="Recents" className={classes.tablabel} {...a11yProps(1)} />
-        </Tabs>
+          <StyledTab
+            label="Trending"
+            className={classes.tablabel}
+            {...a11yProps(0)}
+          />
+          <StyledTab
+            label="Latest"
+            className={classes.tablabel}
+            {...a11yProps(1)}
+          />
+        </StyledTabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Recents />
+        <Popular />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Popular />
+        <Recents />
       </TabPanel>
     </div>
   );

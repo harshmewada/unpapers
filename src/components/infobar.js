@@ -1,25 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import Camera from "@material-ui/icons/CameraEnhanceRounded";
 import Download from "@material-ui/icons/CloudDownloadSharp";
 import Wallpaper from "@material-ui/icons/Wallpaper";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import Fade from "@material-ui/core/Fade";
+
 import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import NavigationIcon from "@material-ui/icons/Navigation";
 
 const useStyles = makeStyles(theme => ({
   info: {
@@ -77,7 +70,6 @@ const StyledMenuItem = withStyles(theme => ({
 export const Infobar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
   function handleClick(event) {
     setAnchorEl(event.currentTarget);

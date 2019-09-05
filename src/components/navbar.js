@@ -5,23 +5,18 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import menu from "../Images/menu.png";
-import round from "../Images/moon.png";
+
+import menu from "../Images/menu.svg";
+
 import Navlist from "./navlist";
 
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
 import Divider from "@material-ui/core/Divider";
-import BookIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
+
 import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
-import Image from "../Images/lines.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     fontFamily: "Poppins",
     fontSize: "9vw",
-    color: "#544B8D",
+    color: "#7C7D81",
     fontWeight: "700",
     marginLeft: theme.spacing(1)
   },

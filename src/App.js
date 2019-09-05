@@ -6,11 +6,26 @@ import Navbar from "./components/navbar";
 import Tabdiv from "./components/tabs";
 import Download from "./components/download";
 import Wallpapers from "./components/wallpapers";
-
+import Recents from "./components/recents";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import {
+  Grid,
+  Card,
+  CardActionArea,
+  CardMedia,
+  makeStyles
+} from "@material-ui/core";
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    width: "90vw",
+    justifyContent: "center"
+  }
+}));
 function App() {
+  const classes = useStyles();
   return (
     <Router>
       <div className="App">
@@ -23,6 +38,7 @@ function App() {
         </Switch> */}
         {/* <Intro /> */}
         <Navbar />
+
         <Tabdiv />
         {/* <Download /> */}
       </div>

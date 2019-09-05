@@ -5,14 +5,21 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
+    "babel-register": "^6.26.0",
+    "concurrently": "^4.1.2",
+    "express": "^4.17.1",
     "gh-pages": "^2.1.1",
+    "node-fetch": "^2.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-infinite-scroll-component": "^4.5.3",
+    "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "universal-config": "^0.3.0",
     "unsplash-js": "^5.0.0"
   },
-  "homepage": "https://harshmewada.github.io/darkpapers",
+  "homepage": "https://harshmewada.github.io/unpapers",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -37,8 +44,17 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshmewada/darkpapers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/harshmewada/darkpapers/issues"
+  }
 }
