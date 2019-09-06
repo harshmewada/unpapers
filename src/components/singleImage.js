@@ -10,7 +10,7 @@ import {
 const useStyles = makeStyles(theme => ({
   card: {
     borderRadius: "5px",
-    boxShadow: " 0px 0px 10px rgba(0, 0, 0, 0.25)"
+    boxShadow: " 0px 0px 4vw rgba(0, 0, 0, 0.25)"
   },
   media: {
     minHeight: 300
@@ -18,17 +18,20 @@ const useStyles = makeStyles(theme => ({
 }));
 const SingleImage = props => {
   const classes = useStyles();
+  // console.log(props.image, "props");
+  const hi = props.image;
 
   return (
     <Grid item xs={6}>
       <Card className={classes.card}>
-        <CardActionArea>
-          {/* {console.log(props.image)} */}
-          <CardMedia
-            image={props.image.small}
-            className={classes.media}
-          ></CardMedia>
-        </CardActionArea>
+        {props.image ? (
+          <CardActionArea>
+            {/* {console.log(props.image)} */}
+            <CardMedia image={hi.small} className={classes.media}></CardMedia>
+          </CardActionArea>
+        ) : (
+          "loading"
+        )}
       </Card>
     </Grid>
   );

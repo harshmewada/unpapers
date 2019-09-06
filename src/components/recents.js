@@ -3,7 +3,11 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import SingleImage from "./singleImage";
 import Unsplash, { toJson } from "unsplash-js";
-import { useInfiniteScroll } from "./inifinitescroll";
+
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+import { InfiniteScroll } from "react-simple-infinite-scroll";
+
 const useStyles = makeStyles(theme => ({
   card: {
     borderRadius: "10px",
@@ -11,19 +15,34 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     minHeight: 300
+  },
+  top: {
+    width: "100%",
+    marginTop: `2vh`,
+    marginBottom: `2vh`,
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1)
+  },
+  fab: {
+    margin: theme.spacing(1),
+    textTransform: "none",
+    fontFamily: "Poppins",
+    boxShadow: "none"
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
   }
 }));
 
 const Recents = () => {
   const classes = useStyles();
-  const [array, setArray] = useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [query, setQuery] = React.useState(0);
+
+  const [array, setArray] = useState({ images: [] });
   const [pages, setPages] = useState(1);
-  const [imagenum, setImagenum] = useState(10);
-  // const [listItems, setListItems] = useState(
-  //   Array.from(Array(30).keys(), n => n + 1)
-  // ); array
-  // console.log(listItems);
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  const [imagenum, setImagenum] = useState(100);
+
   console.log(pages);
 
   const unsplash = new Unsplash({
@@ -32,52 +51,48 @@ const Recents = () => {
     secret: "9d5527e0b234642afa71a0bca96afaa14bf14bd000fabc693e31a29cfcb9d7ea"
   });
   async function imgget() {
-    const file = await unsplash.photos.listPhotos(pages, imagenum, "latest");
-    let result = await file;
-    const data = await result.json();
-    // console.log(array);
-    return setArray(data);
+    const file = unsplash.photos.listPhotos(pages, imagenum, "latest");
+    file
+      .then(toJson)
+      .then(res => setArray({ images: array.images.concat(res) }))
+      .then(console.log("Imgget runnig"))
+      .then(res => setQuery(res));
   }
 
   useEffect(() => {
     imgget();
-  }, []);
-  // async function imgget() {
-  //   const file = await unsplash.photos.listPhotos(1,2, "latest");
-  //   let result = await file;
-  //   const array = await result.json();
-  //   // console.log(array);
-  //   setstate(array);
-  // }
-  // imgget();
+  }, [pages]);
 
-  var fruits = [];
-  var Empty = [];
-  var Final = [];
-  const photo = array.forEach(function(i, val) {
-    const file = i;
-    const ima = i.urls;
-    const id = i.d;
-    Empty.push(file);
+  useEffect(() => {
+    setLoading(gogo => !gogo);
+  }, [array.images]);
 
-    Final = Empty;
-  });
-
-  function fetchMoreListItems() {
-    setTimeout(() => {
-      setPages(pages + 1);
-      imgget();
-      setIsFetching(false);
-    }, 0);
+  function handleClickLoading() {
+    setPages(pages + 1);
+    setLoading(prevLoading => !prevLoading);
+    console.log("loading");
   }
 
   return (
     <div className={classes.main}>
-      <Grid container direction="row" spacing={2}>
-        {Final.map(file => (
-          <SingleImage image={file.urls} key={file.id} />
-        ))}
-      </Grid>
+      <InfiniteScroll
+        throttle={100}
+        threshold={300}
+        isLoading={loading}
+        hasMore={!query}
+        onLoadMore={handleClickLoading}
+      >
+        <Grid container direction="row" spacing={2}>
+          {array.images.length > 0
+            ? array.images.map(file => (
+                <SingleImage image={file.urls} key={file.id} />
+              ))
+            : null}
+          {loading && (
+            <LinearProgress className={classes.top} variant="query" />
+          )}
+        </Grid>
+      </InfiniteScroll>
     </div>
   );
 };

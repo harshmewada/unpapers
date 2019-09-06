@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import navbg from "../Images/navbg.png";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -42,8 +42,8 @@ const useStyles = makeStyles(theme => ({
   },
   list: {
     width: 300,
-    height: "100vh",
-    backgroundImage: `url(${navbg})`
+    height: "100vh"
+    // backgroundImage: `url(${navbg})`
   },
   fullList: {
     width: "auto"

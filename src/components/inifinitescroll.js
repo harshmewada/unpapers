@@ -17,13 +17,21 @@ export const useInfiniteScroll = callback => {
 
   function handleScroll() {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
+      document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.scrollHeight ||
       isFetching
     )
-      return;
-    setIsFetching(true);
+      return setTimeout(setIsFetching(true), 2000);
   }
 
   return [isFetching, setIsFetching];
+};
+window.onscroll = function scrollar() {
+  var scrollHeight, totalHeight;
+  scrollHeight = document.body.scrollHeight;
+  totalHeight = window.scrollY + window.innerHeight;
+
+  if (totalHeight >= scrollHeight) {
+    console.log("at the bottom");
+  }
 };

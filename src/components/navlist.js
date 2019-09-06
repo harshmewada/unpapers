@@ -5,15 +5,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import help from "../Images/help.png";
-import about from "../Images/about.png";
-import support from "../Images/support.png";
-import rate from "../Images/rate.png";
-import contact from "../Images/contact.png";
-import android from "../Images/android.png";
+import Stars from "@material-ui/icons/Stars";
+import Contact from "@material-ui/icons/People";
+import Info from "@material-ui/icons/Info";
 
+import Favorite from "@material-ui/icons/Favorite";
+import Bug from "@material-ui/icons/BugReport";
+import Adb from "@material-ui/icons/Adb";
+import Work from "@material-ui/icons/Work";
 import bug from "../Images/bug.png";
 import work from "../Images/work.png";
 
@@ -22,7 +21,10 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     maxWidth: 360
   },
-  text: {}
+
+  icons: {
+    color: "#FC6E32"
+  }
 }));
 
 function ListItemLink(props) {
@@ -37,7 +39,7 @@ export default function Navlist() {
       <List component="nav" aria-label="main mailbox folders">
         <ListItem button>
           <ListItemIcon>
-            <img src={rate} />
+            <Stars className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Rate" className={classes.text}>
             Rate
@@ -45,26 +47,26 @@ export default function Navlist() {
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <img src={contact} />
+            <Contact className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Contact Developer" />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <img src={support} />
+            <Favorite className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Support" />
         </ListItem>
 
         <ListItem button>
           <ListItemIcon>
-            <img src={about} />
+            <Info className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <img src={bug} />
+            <Bug className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Report Bugs" />
         </ListItem>
@@ -73,13 +75,13 @@ export default function Navlist() {
       <List component="nav" aria-label="secondary mailbox folders">
         <ListItem button>
           <ListItemIcon>
-            <img src={android} />
+            <Adb className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="V 1.0" />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <img src={work} />
+            <Work className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Work with Us" />
         </ListItem>

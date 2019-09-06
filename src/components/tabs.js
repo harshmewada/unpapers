@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -56,7 +57,7 @@ const StyledTab = withStyles(theme => ({
     textTransform: "none",
     fontFamily: "Roboto",
     fontSize: "5vw",
-    fontWeight: "550",
+    fontWeight: "400",
     width: "43%",
     margin: 5,
     color: "#7C7D81",
@@ -92,19 +93,37 @@ const useStyles = makeStyles(theme => ({
   },
   tab: {
     textAlign: "center"
+  },
+  visit: {
+    textAlign: "center",
+    fontFamily: "Poppins",
+    color: " #7C7D99"
   }
 }));
 
 export default function Tabdiv() {
   const classes = useStyles();
+  const [recent, setRecent] = useState(false);
+
+  const [count, setCount] = useState(() =>
+    JSON.parse(localStorage.getItem("count"))
+  );
+  useEffect(() => setCount(count => count + 1), []);
+  useEffect(() => {
+    localStorage.setItem("count", JSON.stringify(count));
+  }, [count]);
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
     setValue(newValue);
+    setRecent(!recent);
   }
 
   return (
     <div className={classes.root}>
+      <div className={classes.visit}>you visited this site {count} times</div>
+
+      {/* <Button onClick={() => setCount(count => count + 1)}>Inrese</Button> */}
       <AppBar position="static" className={classes.tabbar} elevation={0}>
         <StyledTabs
           value={value}
