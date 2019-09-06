@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d6a6b4a728b2c9fb0865ad95d544cf22",
+    "revision": "326a4b6012a2ba0bc8790f45b0caa2ce",
     "url": "/unpapers/index.html"
   },
   {
-    "revision": "91e03c05d60ad9284e61",
+    "revision": "2e13e1fdcf5de62e232b",
     "url": "/unpapers/static/css/main.c1b59d2f.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/unpapers/static/js/2.bae489be.chunk.js"
   },
   {
-    "revision": "91e03c05d60ad9284e61",
-    "url": "/unpapers/static/js/main.ffaeacaf.chunk.js"
+    "revision": "2e13e1fdcf5de62e232b",
+    "url": "/unpapers/static/js/main.18c9cc78.chunk.js"
   },
   {
     "revision": "87af484c7d07f3def86f",
