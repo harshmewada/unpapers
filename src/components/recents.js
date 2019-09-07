@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import SingleImage from "./singleImage";
 import Unsplash, { toJson } from "unsplash-js";
 
-import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { InfiniteScroll } from "react-simple-infinite-scroll";
 
@@ -16,12 +16,9 @@ const useStyles = makeStyles(theme => ({
   media: {
     minHeight: 300
   },
-  top: {
-    width: "100%",
-    marginTop: `2vh`,
-    marginBottom: `2vh`,
-    marginRight: theme.spacing(1),
-    marginLeft: theme.spacing(1)
+  progress: {
+    display: "flex",
+    margin: "4vh auto"
   },
   fab: {
     margin: theme.spacing(1),
@@ -41,7 +38,7 @@ const Recents = () => {
 
   const [array, setArray] = useState({ images: [] });
   const [pages, setPages] = useState(1);
-  const [imagenum, setImagenum] = useState(100);
+  const [imagenum, setImagenum] = useState(50);
 
   console.log(pages);
 
@@ -89,7 +86,9 @@ const Recents = () => {
               ))
             : null}
           {loading && (
-            <LinearProgress className={classes.top} variant="query" />
+            <div className={classes.progress}>
+              <CircularProgress />
+            </div>
           )}
         </Grid>
       </InfiniteScroll>
