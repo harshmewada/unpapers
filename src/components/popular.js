@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import SingleImage from "./singleImage";
 import Unsplash, { toJson } from "unsplash-js";
+import SimpleModal from "./imagemodal";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -31,14 +32,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Recents = () => {
+const Popular = props => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [query, setQuery] = React.useState(0);
-
+  const [open, setOpen] = useState(false);
   const [array, setArray] = useState({ images: [] });
+  const [modalImage, setModalImage] = useState(null);
   const [pages, setPages] = useState(1);
-  const [imagenum, setImagenum] = useState(50);
+  const [imagenum] = useState(50);
 
   console.log(pages);
 
@@ -52,7 +54,7 @@ const Recents = () => {
     file
       .then(toJson)
       .then(res => setArray({ images: array.images.concat(res) }))
-      .then(console.log("Imgget runnig"))
+
       .then(res => setQuery(res));
   }
 
@@ -69,9 +71,16 @@ const Recents = () => {
     setLoading(prevLoading => !prevLoading);
     console.log("loading");
   }
+  const handlemodal = (file, data) => {
+    setModalImage(data);
+    setOpen(!open);
+  };
 
   return (
     <div className={classes.main}>
+      {open ? (
+        <SimpleModal type={true} close={() => setOpen(!open)} {...modalImage} />
+      ) : null}
       <InfiniteScroll
         throttle={100}
         threshold={300}
@@ -82,7 +91,13 @@ const Recents = () => {
         <Grid container direction="row" spacing={2}>
           {array.images.length > 0
             ? array.images.map(file => (
-                <SingleImage image={file.urls} key={file.id} />
+                <SingleImage
+                  image={file.urls}
+                  key={file.id}
+                  id={file.id}
+                  {...file}
+                  modal={(file, data) => handlemodal(file, data)}
+                />
               ))
             : null}
           {loading && (
@@ -95,4 +110,4 @@ const Recents = () => {
     </div>
   );
 };
-export default Recents;
+export default Popular;

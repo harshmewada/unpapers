@@ -107,9 +107,6 @@ const Navbar = () => {
       </Grid>
     </div>
   );
-  const clickLink = e => {
-    console.log(e);
-  };
 
   return (
     <div className={classes.main}>
@@ -125,9 +122,8 @@ const Navbar = () => {
                   className={classes.menuButton}
                   onClick={toggleDrawer("right", true)}
                 >
-                  <img src={menu} className={classes.menuicon} />
+                  <img src={menu} className={classes.menuicon} alt="Menu" />
                 </Button>
-
                 <SwipeableDrawer
                   className={classes.swipable}
                   anchor="right"

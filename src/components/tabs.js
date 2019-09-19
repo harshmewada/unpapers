@@ -7,8 +7,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Recents from "./recents";
-import Popular from "./popular";
+
+import LoadTabs from "./Loadtabs";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +45,6 @@ const StyledTabs = withStyles({
     justifyContent: "center",
     backgroundColor: "transparent",
     "& > div": {
-      maxWidth: 80,
       width: "100%",
       backgroundColor: "#FC6E32"
     }
@@ -104,14 +103,15 @@ const useStyles = makeStyles(theme => ({
 export default function Tabdiv() {
   const classes = useStyles();
   const [recent, setRecent] = useState(false);
+  const [active, setActive] = useState(0);
 
-  const [count, setCount] = useState(() =>
-    JSON.parse(localStorage.getItem("count"))
-  );
-  useEffect(() => setCount(count => count + 1), []);
-  useEffect(() => {
-    localStorage.setItem("count", JSON.stringify(count));
-  }, [count]);
+  // const [count, setCount] = useState(() =>
+  //   JSON.parse(localStorage.getItem("count"))
+  // );
+  // useEffect(() => setCount(count => count + 1), []);
+  // useEffect(() => {
+  //   localStorage.setItem("count", JSON.stringify(count));
+  // }, [count]);
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
@@ -121,7 +121,7 @@ export default function Tabdiv() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.visit}>you visited this site {count} times</div>
+      {/* <div className={classes.visit}>you visited this site {count} times</div> */}
 
       {/* <Button onClick={() => setCount(count => count + 1)}>Inrese</Button> */}
       <AppBar position="static" className={classes.tabbar} elevation={0}>
@@ -135,19 +135,20 @@ export default function Tabdiv() {
             label="Trending"
             className={classes.tablabel}
             {...a11yProps(0)}
+            onClick={() => setActive(0)}
           />
           <StyledTab
             label="Latest"
             className={classes.tablabel}
             {...a11yProps(1)}
+            onClick={() => setActive(1)}
           />
         </StyledTabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <Popular />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Recents />
+      <TabPanel value={value} index={active}>
+        <div>
+          <LoadTabs data={active} />
+        </div>
       </TabPanel>
     </div>
   );

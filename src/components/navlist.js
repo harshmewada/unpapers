@@ -13,8 +13,6 @@ import Favorite from "@material-ui/icons/Favorite";
 import Bug from "@material-ui/icons/BugReport";
 import Adb from "@material-ui/icons/Adb";
 import Work from "@material-ui/icons/Work";
-import bug from "../Images/bug.png";
-import work from "../Images/work.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,10 +24,6 @@ const useStyles = makeStyles(theme => ({
     color: "#FC6E32"
   }
 }));
-
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
 
 export default function Navlist() {
   const classes = useStyles();

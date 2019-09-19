@@ -1,31 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
-import Intro from "./components/intro";
+
 import Navbar from "./components/navbar";
 import Tabdiv from "./components/tabs";
-import Download from "./components/download";
-import Wallpapers from "./components/wallpapers";
-import Recents from "./components/recents";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import {
-  Grid,
-  Card,
-  CardActionArea,
-  CardMedia,
-  makeStyles
-} from "@material-ui/core";
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    width: "90vw",
-    justifyContent: "center"
-  }
-}));
+
+import { BrowserRouter as Router } from "react-router-dom";
+
 function App() {
-  const classes = useStyles();
   return (
     <Router>
       <div className="App">

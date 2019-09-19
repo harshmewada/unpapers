@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core";
 import SingleImage from "./singleImage";
 import Unsplash, { toJson } from "unsplash-js";
-import SimpleModal from "./imagemodal";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { InfiniteScroll } from "react-simple-infinite-scroll";
-
+const ColorCircularProgress = withStyles({
+  root: {
+    color: "#00695c"
+  }
+})(CircularProgress);
 const useStyles = makeStyles(theme => ({
   card: {
     borderRadius: "10px",
@@ -32,13 +35,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Recents = props => {
+const LoadImage = props => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [query, setQuery] = React.useState(0);
-  const [open, setOpen] = useState(false);
+
   const [array, setArray] = useState({ images: [] });
-  const [modalImage, setModalImage] = useState(null);
   const [pages, setPages] = useState(1);
   const [imagenum, setImagenum] = useState(50);
 
@@ -50,11 +52,11 @@ const Recents = props => {
     secret: "9d5527e0b234642afa71a0bca96afaa14bf14bd000fabc693e31a29cfcb9d7ea"
   });
   async function imgget() {
-    const file = unsplash.photos.listPhotos(pages, imagenum, "latest");
+    const file = unsplash.photos.listPhotos(pages, imagenum, props.type);
     file
       .then(toJson)
       .then(res => setArray({ images: array.images.concat(res) }))
-
+      .then(console.log("Imgget runnig"))
       .then(res => setQuery(res));
   }
 
@@ -71,16 +73,9 @@ const Recents = props => {
     setLoading(prevLoading => !prevLoading);
     console.log("loading");
   }
-  const handlemodal = (file, data) => {
-    setModalImage(data);
-    setOpen(!open);
-  };
 
   return (
     <div className={classes.main}>
-      {open ? (
-        <SimpleModal type={true} close={() => setOpen(!open)} {...modalImage} />
-      ) : null}
       <InfiniteScroll
         throttle={100}
         threshold={300}
@@ -91,18 +86,12 @@ const Recents = props => {
         <Grid container direction="row" spacing={2}>
           {array.images.length > 0
             ? array.images.map(file => (
-                <SingleImage
-                  image={file.urls}
-                  key={file.id}
-                  id={file.id}
-                  {...file}
-                  modal={(file, data) => handlemodal(file, data)}
-                />
+                <SingleImage image={file.urls} key={file.id} />
               ))
             : null}
           {loading && (
             <div className={classes.progress}>
-              <CircularProgress />
+              <ColorCircularProgress />
             </div>
           )}
         </Grid>
@@ -110,4 +99,4 @@ const Recents = props => {
     </div>
   );
 };
-export default Recents;
+export default LoadImage;
